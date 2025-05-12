@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="ARCHITECT: Generating Vivid and Interactive 3D Scenes with Hierarchical 2D Inpainting">
+  <meta name="keywords" content="Scene Generation, Robotics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generating Vivid and Interactive 3D Scenes with Hierarchical 2D Inpainting.</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+<!--  <link rel="icon" href="./static/images/favicon.svg">-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ARCHITECT: Generating Vivid and Interactive 3D Scenes with Hierarchical 2D Inpainting</h1>
+          <h3 class="title is-4 conference-authors"><a target="_blank" href="https://neurips.cc">NeurIPS 2024</a></h3>
+          <div class="is-size-5 publication-authors">
+            <a href="https://wangyian-me.github.io" class="author-block">Yian Wang</a><sup>1</sup>,
+            <a href="https://link-to-author-2-profile.com" class="author-block">Xiaowen Qiu</a><sup>1</sup>,
+            <a href="https://jiagengliu02.github.io" class="author-block">Jiageng Liu</a><sup>1</sup>,
+            <a href="https://acmlczh.github.io" class="author-block">Zhehuan Chen</a><sup>3</sup>,
+            <a href="https://caijiting.github.io" class="author-block">Jiting Cai</a><sup>2</sup>,
+            <a href="https://zswang666.github.io" class="author-block">Tsun-Hsuan Wang</a><sup>3</sup>,
+            <a href="https://yufeiwang63.github.io" class="author-block">Yufei Wang</a><sup>4</sup>,
+            <a href="https://www.zhou-xian.com" class="author-block">Zhou Xian</a><sup>4</sup>,
+            <a href="https://people.csail.mit.edu/ganchuang/" class="author-block">Chuang Gan</a><sup>1</sup>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Umass Amherst</span>
+            <span class="author-block"><sup>2</sup>SJTU</span>
+            <span class="author-block"><sup>3</sup>MIT CSAIL</span>
+            <span class="author-block"><sup>4</sup>CMU</span>
+          </div>
+
+           <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=JHg9eNuw6p"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2411.09823"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+<!--              <span class="link-block">-->
+<!--                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fab fa-youtube"></i>-->
+<!--                  </span>-->
+<!--                  <span>Video</span>-->
+<!--                </a>-->
+<!--              </span>-->
+             <span class="link-block">
+               <a href="https://github.com/wangyian-me/architect_official_code/tree/main"
+                  class="external-link button is-normal is-rounded is-dark">
+                 <span class="icon">
+                     <i class="fab fa-github"></i>
+                 </span>
+                 <span>Code</span>
+                 </a>
+             </span>
+<!--              <span class="link-block">-->
+<!--                <a href="https://github.com/google/nerfies/releases/tag/0.1"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="far fa-images"></i>-->
+<!--                  </span>-->
+<!--                  <span>Data</span>-->
+<!--                  </a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section class="section" style="padding: 0">
+      <div class="container is-max-desktop">
+          <!-- Abstract. -->
+          <div class="columns is-centered has-text-centered">
+              <video poster="" id="" autoplay controls loop width="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="./static/videos/architect-teaser2.mp4" type="video/mp4">
+              </video>
+          </div>
+      </div>
+  </section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Creating large-scale interactive 3D environments is essential for the development of Robotics and Embodied AI research. Since pre-trained 2D image generative models better capture scene and object configuration than LLMs, we address these challenges by introducing Architect, a generative framework that creates complex and realistic 3D embodied environments leveraging diffusion-based 2D image inpainting.
+            We utilize foundation visual perception models to obtain each generated object from the image and leverage pre-trained depth estimation models to lift the generated 2D image to 3D space.
+            While there are still challenges that the camera parameters and scale of depth are still absent in the generated image, we address those problems by ``controlling'' the diffusion model by hierarchical inpainting. Specifically, having access to ground-truth depth and camera parameters in simulation, we first render a photo-realistic image of only back-grounds in it. Then, we inpaint the foreground in this image, passing the geometric cues in the back-ground to the inpainting model, which informs the camera parameters.
+            This process effectively controls the camera parameters and depth scale for the generated image, facilitating the back-projection from 2D image to 3D point clouds.
+            Our pipeline is further extended to a hierarchical and iterative inpainting process to continuously generate placement of large furniture and small objects to enrich the scene.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+<!--     <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<div class="container is-full-hd">
+  <hr class="solid">
+</div>
+
+<section class="section">
+    <div class="container is-max-widescreen">
+        <div class="rows">
+            <div class="rows is-centered ">
+                <div class="row is-full-width">
+
+
+                    <h2 class="title is-3" style="display: flex; justify-content: center; align-items: center;"><span class="dvima">Architect Pipeline</span></h2>
+                    <!-- <img src="videos/pipeline.m4v" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto; max-width: 80%;" /> -->
+                    <span style="font-size: 125%">
+                        <span style="font-weight: bold">Architect is a generative framework that creates complex and realistic 3D embodied environments leveraging diffusion-based 2D image inpainting.</span>
+                    </span>
+                    <br>
+                        <video autoplay controls loop playsinline height="100%">
+                          <source src="./static/videos/architect-teaser1.mp4"
+                                  type="video/mp4">
+                        </video>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container is-full-hd">
+  <hr class="solid">
+</div>
+
+
+<section class="section">
+    <div class="container is-max-widescreen">
+        <div class="rows">
+            <div class="rows is-centered ">
+                <div class="row is-full-width">
+
+
+                    <h2 class="title is-3" style="display: flex; justify-content: center; align-items: center;"><span class="dvima">Manipulation</span></h2>
+                    <!-- <img src="videos/pipeline.m4v" class="interpolation-image" alt=""
+                        style="display: block; margin-left: auto; margin-right: auto; max-width: 80%;" /> -->
+                        <br>
+                        <span style="font-size: 125%">
+                        <span style="font-weight: bold">Since all large and small objects are placed in the scene separately, they become naturally interactive when powered by a physics engine, opening up opportunities to collect large-scale robot manipulation data in complex scenarios.</span>
+                        </span>
+                        <video autoplay controls muted loop playsinline height="100%">
+                          <source src="./static/videos/architect-teaser3.mp4"
+                                  type="video/mp4">
+                        </video>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+      <div class="container is-max-widescreen">
+          <div class="rows">
+              <div class="rows is-centered ">
+                  <div class="row is-full-width">
+                      <h2 class="title is-3"><span class="dvima">Generated Large Scenarios</span></h2>
+                      <p style="font-size: 125%">
+                          Please select an image below to view the results.
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <br>
+          <div class="columns" style="align-items: end;">
+              <div class="column is-half">
+                  <!-- <p style="font-size: 1.5em"><b>Isaac</b></p> -->
+
+                  <div class="col-md-4 col-sm-4 col-xs-4">
+
+                      <img src="./static/videos/restaurant.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/house.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/office.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/bookstore.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/gamestore.png" width="24.%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/shoestore.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/grocery1.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                      <img src="./static/videos/hospital.png" width="24%" style="border-radius: 10px;" onclick="populateDemo(this, 1);">
+                  </div>
+              </div>
+              <div class="row border rounded" style="padding-top:2px; padding-bottom:12px;">
+                  <div class="col-md-6">
+                      <video id="demo-video-1" style="border-radius: 5px;" autoplay loop muted webkit-playsinline
+                          playsinline onclick="setAttribute('controls', 'true');">
+                          <source id="expandedImg-1" src="./static/videos/restaurant.mp4" type="video/mp4">
+                      </video>
+                  </div>
+              </div>
+          </div>
+      </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{wangarchitect,
+  title={Architect: Generating Vivid and Interactive 3D Scenes with Hierarchical 2D Inpainting},
+  author={Wang, Yian and Qiu, Xiaowen and Liu, Jiageng and Chen, Zhehuan and Cai, Jiting and Wang, Yufei and Wang, Tsun-Hsuan and Xian, Zhou and Gan, Chuang},
+  booktitle={The Thirty-eighth Annual Conference on Neural Information Processing Systems}
+}</code></pre>
+  </div>
+</section>
+
+  
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            <!-- This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>. -->
+            Website built upon <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>' open-source template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+<script>
+
+  timeoutIds = [];
+
+  function populateDemo(imgs, num) {
+      // Get the expanded image
+      var expandImg = document.getElementById("expandedImg-" + num);
+      // Get the image text
+      var imgText = document.getElementById("imgtext-" + num);
+      var answer = document.getElementById("answer-" + num);
+
+      // Use the same src in the expanded image as the image being clicked on from the grid
+      expandImg.src = imgs.src.replace(".png", ".mp4");
+      var video = document.getElementById('demo-video-' + num);
+      // or video = $('.video-selector')[0];
+      video.pause()
+      video.load();
+      video.play();
+      video.removeAttribute('controls');
+
+      console.log(expandImg.src);
+      // Use the value of the alt attribute of the clickable image as text inside the expanded image
+      var qa = imgs.alt.split("[sep]");
+      imgText.innerHTML = qa[0];
+      answer.innerHTML = "";
+
+      // Show the container element (hidden with CSS)
+      expandImg.parentElement.style.display = "block";
+      for (timeoutId of timeoutIds) {
+          clearTimeout(timeoutId);
+      }
+
+      // NOTE (wliang): Modified from original to read from file instead
+      fetch(qa[1])
+          .then(response => response.text())
+          .then(contents => {
+              // Call the processData function and pass the contents as an argument
+              typeWriter(contents, 0, qa[0], num, "imgtext-", "answer-");
+          })
+          .catch(error => console.error('Error reading file:', error));
+  }
+</script>
+
+</html>
